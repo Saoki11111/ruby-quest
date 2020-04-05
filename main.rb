@@ -42,10 +42,11 @@ class Brave
 end
 
 class Monster
-  # 値の取り出し
   attr_reader :name, :offense, :defense
-  # 値の取り出し、書き込みが可能
-  attr_accessor :hp
+  attr_accessor :hp, :name
+
+  POWER_UP = 1.5
+  HELP_HP = 0.5
 
   # **params でハッシュ形式のみしか受け付けないようにする
   def initialize(**params)
@@ -53,7 +54,41 @@ class Monster
     @hp = params[:hp]
     @offense = params[:offense]
     @defense = params[:defense]
+    @transformation = false
+
+    # @transformation_hp = params[:hp] / 2
+    @transformation_hp = params[:hp] * HELP_HP
   end
+
+  def attack(brave)
+    if @hp <= @transformation_hp && @transformation == false
+      @transformation = true
+      transform
+    end
+    puts "#{@name}の攻撃"
+
+    damage = @offense - brave.defense
+    brave.hp -= damage
+
+    puts "#{brave.name}は #{damage} のダメージを受けた"
+    puts "#{brave.name}の残りHPは#{brave.hp}だ"
+  end
+
+  # クラス外から呼び出せないようにする
+  private
+
+    def transform
+      transform_name = "ドラゴン"
+
+      puts <<~EOS
+      #{@name}は怒っている
+      #{@name}は#{@transform_name}に変身した
+      EOS
+
+      @offense *= POWER_UP
+      @name = transform_name
+    end
+
 end
 
 # 勇者クラスとモンスタークラスをインスタンス化
@@ -62,3 +97,4 @@ brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 120)
 monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 130)
 
 brave.attack(monster)
+monster.attack(brave)
