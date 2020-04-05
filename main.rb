@@ -4,6 +4,9 @@ class Brave
   attr_reader :name, :offense, :defense
   attr_accessor :hp
 
+  # 必殺攻撃の計算に使う定数
+  SPECIAL_ATTACK_CONSTANT = 1.5
+
   def initialize(**params)
     @name = params[:name]
     @hp = params[:hp]
@@ -13,17 +16,29 @@ class Brave
 
   # 引数でモンスタークラスのインスタンスを受け取る
   def attack(monster)
-    # ダメージ計算の処理
-    damage = @offense - monster.defense
-    # モンスターの HP から 計算したダメージを引く
-    # 値は代入する( -= 自己代入演算)
+    puts "#{@name}の攻撃"
+
+    # 0 ~ 3 の間でランダムに数字が変わる
+    attack_num = rand(4)
+
+    # 1/4 の確率で special_attack を実行
+    if attack_num == 0
+      damage = calculate_special_attack
+    else
+      damage = @offense - monster.defense
+    end
+
     monster.hp -= damage
 
-    # メッセージを追記
-    puts "#{@name} の攻撃"
     puts "#{monster.name}は #{damage} のダメージを受けた"
     puts "#{monster.name}の残り HPは #{monster.hp}だ"
   end
+
+  def calculate_special_attack
+    # 攻撃力が 1.5倍
+    @offense * SPECIAL_ATTACK_CONSTANT
+  end
+
 end
 
 class Monster
