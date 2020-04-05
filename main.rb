@@ -9,6 +9,11 @@ class Brave
     @defense = params[:defense]
   end
 
+  # 引数でモンスタークラスのインスタンスを受け取る
+  def attack(monster)
+    # モンスタークラスのインスタンスが参照できているか確かめる
+    puts "テスト: #{monster.name}のHPを表示 -> #{monster.hp}"
+  end
 end
 
 class Monster
@@ -26,20 +31,9 @@ class Monster
   end
 end
 
-brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
+# 勇者クラスとモンスタークラスをインスタンス化
 # ハッシュ形式なのでどんなデータか把握しやすくなる
+brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
 monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 100)
 
-# ヒアドキュメントで出力
-puts <<~TEXT
-NAME:#{brave.name}
-HP:#{brave.hp}
-OFFENSE:#{brave.offense}
-DEFENSE:#{brave.defense}
-TEXT
-
-# hp にダメージを与える処理
-brave.hp -= 30
-
-# ダメージに関するメッセージ
-puts "#{brave.name}はダメージを受けた！残りのHPは#{brave.hp}だ"
+brave.attack(monster)
