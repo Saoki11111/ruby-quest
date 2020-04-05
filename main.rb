@@ -1,3 +1,5 @@
+require 'pry'
+
 class Brave
   attr_reader :name, :offense, :defense
   attr_accessor :hp
@@ -11,8 +13,16 @@ class Brave
 
   # 引数でモンスタークラスのインスタンスを受け取る
   def attack(monster)
-    # モンスタークラスのインスタンスが参照できているか確かめる
-    puts "テスト: #{monster.name}のHPを表示 -> #{monster.hp}"
+    # ダメージ計算の処理
+    damage = @offense - monster.defense
+    # モンスターの HP から 計算したダメージを引く
+    # 値は代入する( -= 自己代入演算)
+    monster.hp -= damage
+
+    # メッセージを追記
+    puts "#{@name} の攻撃"
+    puts "#{monster.name}は #{damage} のダメージを受けた"
+    puts "#{monster.name}の残り HPは #{monster.hp}だ"
   end
 end
 
@@ -33,7 +43,7 @@ end
 
 # 勇者クラスとモンスタークラスをインスタンス化
 # ハッシュ形式なのでどんなデータか把握しやすくなる
-brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
-monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 100)
+brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 120)
+monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 130)
 
 brave.attack(monster)
