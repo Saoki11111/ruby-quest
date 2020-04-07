@@ -35,7 +35,6 @@ class Brave
   end
 
   def calculate_special_attack
-    # 攻撃力が 1.5倍
     @offense * SPECIAL_ATTACK_CONSTANT
   end
 
