@@ -93,7 +93,7 @@ end
 
 # 勇者クラスとモンスタークラスをインスタンス化
 # ハッシュ形式なのでどんなデータか把握しやすくなる
-brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 120)
+brave = Brave.new(name: "テリー", hp: 500, offense: 200, defense: 120)
 monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 130)
 
 brave.attack(monster)
