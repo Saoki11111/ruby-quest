@@ -20,31 +20,31 @@ class Brave
 
     # decision_attack_typeメソッドの呼び出し type に入れる
     attack_type = decision_attack_type
-    
-    # attack_type を用いて攻撃処理を振り分け
-    if attack_type == 'special_attack'
-      puts '必殺攻撃'
-      damage = calculate_special_attack - monster.defense
-    else
-      puts '攻撃'
-      damage = @offense - monster.defense
-    end
+
+    damage = calculate_damage(monster, attack_type)
 
     monster.hp -= damage
 
     puts "#{monster.name}は #{damage} のダメージを受けた"
     puts "#{monster.name}の残り HPは #{monster.hp}だ"
   end
-  
+
   def decision_attack_type
     # 攻撃の種類の判定
-    # attack_num = rand(4)
-    attack_num = 0
+    attack_num = rand(4)
 
     if attack_num == 0
       'special_attack'
     else
       'normal_attack'
+    end
+  end
+
+  def calculate_damage(monster, attack_type)
+    if attack_type == "special_attack"
+      calculate_special_attack - monster.defense
+    else
+      @offense - monster.defense
     end
   end
 
