@@ -28,6 +28,8 @@ class Brave
     puts "#{monster.name}の残り HPは #{monster.hp}だ"
   end
 
+  private
+
   def decision_attack_type
     # 攻撃の種類の判定
     attack_num = rand(4)
