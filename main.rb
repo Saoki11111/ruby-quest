@@ -20,12 +20,10 @@ class Brave
 
     # decision_attack_typeメソッドの呼び出し type に入れる
     attack_type = decision_attack_type
-
     damage = calculate_damage(monster, attack_type)
 
-    monster.hp -= damage
+    cause_damage(monster, damage)
 
-    puts "#{monster.name}は #{damage} のダメージを受けた"
     puts "#{monster.name}の残り HPは #{monster.hp}だ"
   end
 
@@ -46,6 +44,11 @@ class Brave
     else
       @offense - monster.defense
     end
+  end
+
+  def cause_damage(monster, damage)
+    monster.hp -= damage
+    puts "#{monster.name}は#{damage}のダメージを受けた"
   end
 
   def calculate_special_attack
