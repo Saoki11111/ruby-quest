@@ -88,17 +88,28 @@ class Monster
       @transformation = true
       transform
     end
+    
     puts "#{@name}の攻撃"
 
-    damage = @offense - brave.defense
+    # ダメージ計算処理の呼び出し
+    damage = caluclate_damage(target: brave, damage: damage) 
+
     brave.hp -= damage
 
-    puts "#{brave.name}は #{damage} のダメージを受けた"
     puts "#{brave.name}の残りHPは#{brave.hp}だ"
   end
 
-  # クラス外から呼び出せないようにする
   private
+
+    # ダメージ計算処理
+    def calculate_damage(target)
+      # 引数で受け取った値を変数に格納
+      damage = params[:damage]
+      damage = params[:target]
+
+      target.hp -= damage
+      puts "#{brave.name}は #{damage} のダメージを受けた"
+    end
 
     def transform
       transform_name = "ドラゴン"
