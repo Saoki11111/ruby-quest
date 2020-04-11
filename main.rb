@@ -13,19 +13,11 @@ class Character
   end
 end
 
-class Brave
-  attr_reader :name, :offense, :defense
-  attr_accessor :hp
+# Character クラスを継承
+class Brave < Caracter
 
   # 必殺攻撃の計算に使う定数
   SPECIAL_ATTACK_CONSTANT = 1.5
-
-  def initialize(**params)
-    @name = params[:name]
-    @hp = params[:hp]
-    @offense = params[:offense]
-    @defense = params[:defense]
-  end
 
   # 引数でモンスタークラスのインスタンスを受け取る
   def attack(monster)
@@ -83,9 +75,8 @@ class Brave
 
 end
 
-class Monster
-  attr_reader :offense, :defense
-  attr_accessor :hp, :name
+# Character クラスを継承
+class Monster < Character
 
   POWER_UP = 1.5
   HELP_HP = 0.5
