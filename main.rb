@@ -1,32 +1,13 @@
 require 'pry'
 require './brave'
 require './character'
+require './games_controller'
 
-brave = Brave.new(name: "テリー", hp: 500, offense: 200, defense: 120)
-monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 130)
+# GamesController クラスをインスタンス化
+games_controller = GamesController.new
 
-# 経験値の計算に使用する定数
-EXP_CONSTANT = 2
+terry = Brave.new(name: "テリー", hp: 500, offense: 200, defense: 120)
+slime = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 130)
 
-# ゴールドの計算に使用する定数
-GOLD_CONSTANT = 3
-
-loop do
-  brave.attack(monster)
-  break if monster.hp <= 0
-
-  monster.attack(brave)
-  break if brave.hp <= 0
-end
-
-battle_result = brave.hp > 0
-
-if battle_result
-  exp = (monster.offense + monster.defense) * EXP_CONSTANT
-  gold = (monster.offense + monster.defense) * GOLD_CONSTANT
-  puts "#{brave.name}はたたかいに勝った"
-  puts "#{exp}の経験値と#{gold}ゴールを獲得した"
-else
-  puts "#{brave.name}はたたかいに負けた"
-  puts "目の前が真っ暗になった"
-end
+# GamesController クラスの battle メソッドを使用
+games_controller.battle(brabe: terry, monster: slime)
