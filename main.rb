@@ -57,6 +57,10 @@ class Brave
     target = params[:target]
 
     target.hp -= damage
+
+    # もしターゲットの HP がマイナスになるなら0を代入
+    target.hp = 0 if target.hp < 0
+
     puts "#{target.name}は#{damage}のダメージを受けた"
   end
 
@@ -109,6 +113,10 @@ class Monster
       target = params[:target]
 
       target.hp -= damage
+
+      # もしターゲットの HP がマイナスになるなら0を代入
+      target.hp = 0 if target.hp < 0
+
       puts "#{target.name}は#{damage} のダメージを受けた"
     end
 
