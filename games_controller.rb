@@ -32,13 +32,16 @@ class GamesController
       @brave.hp <= 0 || @monster.hp <=0
     end
 
-    def battle_result(brave)
+
+    # brave_win? にメソッド名を変更
+    def battle_win?
       @brave.hp > 0
     end
 
     # 勇者の勝敗によりメッセージを変更するメソッド
     def battle_judgement
-      if battle_result 
+      # brave_win? を呼び出す
+      if brave_win?
         result = calculate_of_exp_and_gold 
         # インスタンス変数に変更
         puts "#{@brave.name}はたたかいに勝った"
