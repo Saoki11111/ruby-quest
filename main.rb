@@ -13,7 +13,7 @@ class Character
   end
 end
 
-class Brave < Caracter
+class Brave < Character
   SPECIAL_ATTACK_CONSTANT = 1.5
 
   def attack(monster)
