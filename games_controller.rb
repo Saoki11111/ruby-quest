@@ -7,49 +7,52 @@ class GamesController
     # build_characters を呼び出し
     build_characters(params)
 
-    # 勇者の勝敗によってメッセージを変える
-    if battle_result(brave)
-      resul = calculate_of_exp_and_gold(monster)
-      puts "#{brave.name}はたたかいに勝った"
-      puts "#{result[:exp]}の経験値と#{result[:gold]}ゴールを獲得した"
-    else
-      puts "#{brave.name}はたたかいに負けた"
-      puts "目の前が真っ暗になった"
+    loop do
+      # インスタンス変数に変更
+      @brave.attack(@monster)
+      break if battle_end? # 引数が不要になる
+
+      # インスタンス変数に変更
+      @monster.attack(@brave)
+      break if battle_end? # 引数が不要になる
     end
 
-    loop do
-      brave.attack(monster)
-      break if battle_end?(monster)
-      monster.attack(brave)
-      break if battle_end?(brave)
+    if battle_result # 引数が不要になる
+      resul = calculate_of_exp_and_gold # 引数が不要になる
+      # インスタンス変数に変更
+      puts "#{@brave.name}はたたかいに勝った"
+      puts "#{result[:exp]}の経験値と#{result[:gold]}ゴールを獲得した"
+    else
+      # インスタンス変数に変更
+      puts "#{@brave.name}はたたかいに負けた"
+      puts "目の前が真っ暗になった"
     end
 
   end
 
-
-
-  # 以下メソッドはクラス外からは呼び出さない
   private
-    # キャラクターのインスタンスをインスタンス変数に格納
+
     def build_characters(**params)
+      # 勇者クラス、モンスタークラスそれぞれのインスタンスをインスタンス変数に格納
       @brave = params[:brave]
       @monster = params[:monster]
     end
 
-    # バトル終了判定 
-    def battle_end?(character)
-      character.hp <=0
+    def battle_end?
+    # 勇者かモンスター、どちらかの HP が 0 になったらバトルが終了する
+      @brave.hp <= 0 || @monster.hp <=0
     end
 
-    # 勇者の勝利判定
+    # 引数が不要になる
     def battle_result(brave)
-      brave.hp > 0
+      # インスタンス変数に変更
+      @brave.hp > 0
     end
 
-    # 経験値とゴールドの計算
-    def calculate_of_exp_and_gold(monster)
-      exp = (monster.offense + monster.defense) * EXP_CONSTANT
-      gold = (monster.offense + monster.defense) * GOLD_CONSTANT
+    # 引数が不要になる
+    def calculate_of_exp_and_gold
+      exp = (@monster.offense + @monster.defense) * EXP_CONSTANT
+      gold = (@monster.offense + @monster.defense) * GOLD_CONSTANT
       result = {exp: exp, gold: gold}
 
       result
