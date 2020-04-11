@@ -5,6 +5,12 @@ require './character'
 brave = Brave.new(name: "テリー", hp: 500, offense: 200, defense: 120)
 monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 130)
 
+# 経験値の計算に使用する定数
+EXP_CONSTANT = 2
+
+# ゴールドの計算に使用する定数
+GOLD_CONSTANT = 3
+
 loop do
   brave.attack(monster)
   break if monster.hp <= 0
@@ -16,8 +22,8 @@ end
 battle_result = brave.hp > 0
 
 if battle_result
-  exp = (monster.offense + monster.defense) * 2
-  gold = (monster.offense + monster.defense) * 3
+  exp = (monster.offense + monster.defense) * EXP_CONSTANT
+  gold = (monster.offense + monster.defense) * GOLD_CONSTANT
   puts "#{brave.name}はたたかいに勝った"
   puts "#{exp}の経験値と#{gold}ゴールを獲得した"
 else
