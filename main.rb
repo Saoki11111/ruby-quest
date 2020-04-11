@@ -76,10 +76,16 @@ class Monster < Character
   HELP_HP = 0.5
 
   def initialize(**params)
-    @name = params[:name]
-    @hp = params[:hp]
-    @offense = params[:offense]
-    @defense = params[:defense]
+    # Character クラスの initialize メソッドの処理を渡す
+    # 通常のメソッドと同様に引数を渡すことが出来る
+    super(
+      name: params[:name],
+      hp: params[:hp],
+      offense: params[:offense],
+      defense: params[:defense]
+     )
+
+    # 親クラスでは定義していない処理はそのまま残す
 
     @transformation = false
     @transformation_hp = params[:hp] * HELP_HP
