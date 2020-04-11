@@ -1,7 +1,9 @@
 module MessageDialog
-  def attack_message
-    # 攻撃実行側のクラスの name パラメータを使用して攻撃メッセージを表示
+  def attack_message(**params)
+    attack_type = params[:attack_type]
+
     puts "#{@name}の攻撃"
+   puts '必殺攻撃' if attack_type == 'special_attack'
   end
 
   def damage_message
