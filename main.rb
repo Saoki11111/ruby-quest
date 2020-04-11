@@ -13,18 +13,13 @@ class Character
   end
 end
 
-# Character クラスを継承
 class Brave < Caracter
-
-  # 必殺攻撃の計算に使う定数
   SPECIAL_ATTACK_CONSTANT = 1.5
 
-  # 引数でモンスタークラスのインスタンスを受け取る
   def attack(monster)
     puts "#{@name}の攻撃"
 
     attack_type = decision_attack_type
-
     damage = calculate_damage(target: monster, attack_type: attack_type)
     cause_damage(target: monster, damage: damage)
 
@@ -75,13 +70,11 @@ class Brave < Caracter
 
 end
 
-# Character クラスを継承
 class Monster < Character
 
   POWER_UP = 1.5
   HELP_HP = 0.5
 
-  # **params でハッシュ形式のみしか受け付けないようにする
   def initialize(**params)
     @name = params[:name]
     @hp = params[:hp]
