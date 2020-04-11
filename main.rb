@@ -4,6 +4,11 @@ class Brave
   attr_reader :offense, :defense
   attr_accessor :hp, :name
 
+
+class Brave
+  attr_reader :name, :offense, :defense
+  attr_accessor :hp
+
   # 必殺攻撃の計算に使う定数
   SPECIAL_ATTACK_CONSTANT = 1.5
 
@@ -149,6 +154,8 @@ loop do
 
   # 1行で記述
   break if brave.hp <= 0
+end
+
 battle_result = brave.hp > 0
 
 if battle_result
