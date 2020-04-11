@@ -131,7 +131,20 @@ end
 brave = Brave.new(name: "テリー", hp: 500, offense: 200, defense: 120)
 monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 130)
 
-5.times do
+loop do
   brave.attack(monster)
+
+  # モンスターのHPが0以下なら無限ループを終了
+  if monster.hp <= 0
+    break
+  end
+
   monster.attack(brave)
+
+  # 勇者のHPが0以下なら無限ループを終了
+
+  if brave.hp <= 0
+    break
+  end
+
 end
