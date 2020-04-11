@@ -134,17 +134,12 @@ monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 130)
 loop do
   brave.attack(monster)
 
-  # モンスターのHPが0以下なら無限ループを終了
-  if monster.hp <= 0
-    break
-  end
+  # 1 行で記述
+  break if monster.hp <= 0
 
   monster.attack(brave)
 
-  # 勇者のHPが0以下なら無限ループを終了
-
-  if brave.hp <= 0
-    break
-  end
+  # 1行で記述
+  break if brave.hp <= 0
 
 end
