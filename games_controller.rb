@@ -4,15 +4,8 @@ class GamesController
 
   # バトルの処理
   def battle(**params)
-    brave = params[:brave]
-    monster = params[:monster]
-
-    loop do
-      brave.attack(monster)
-      break if battle_end?(monster)
-      monster.attack(brave)
-      break if battle_end?(brave)
-    end
+    # build_characters を呼び出し
+    build_characters(params)
 
     # 勇者の勝敗によってメッセージを変える
     if battle_result(brave)
@@ -23,10 +16,25 @@ class GamesController
       puts "#{brave.name}はたたかいに負けた"
       puts "目の前が真っ暗になった"
     end
+
+    loop do
+      brave.attack(monster)
+      break if battle_end?(monster)
+      monster.attack(brave)
+      break if battle_end?(brave)
+    end
+
   end
+
+
 
   # 以下メソッドはクラス外からは呼び出さない
   private
+    # キャラクターのインスタンスをインスタンス変数に格納
+    def build_characters(**params)
+      @brave = params[:brave]
+      @monster = params[:monster]
+    end
 
     # バトル終了判定 
     def battle_end?(character)
