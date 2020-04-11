@@ -10,46 +10,46 @@ class GamesController
     loop do
       # インスタンス変数に変更
       @brave.attack(@monster)
-      break if battle_end? # 引数が不要になる
+      break if battle_end? 
 
       # インスタンス変数に変更
       @monster.attack(@brave)
-      break if battle_end? # 引数が不要になる
+      break if battle_end? 
     end
 
-    if battle_result # 引数が不要になる
-      resul = calculate_of_exp_and_gold # 引数が不要になる
-      # インスタンス変数に変更
-      puts "#{@brave.name}はたたかいに勝った"
-      puts "#{result[:exp]}の経験値と#{result[:gold]}ゴールを獲得した"
-    else
-      # インスタンス変数に変更
-      puts "#{@brave.name}はたたかいに負けた"
-      puts "目の前が真っ暗になった"
-    end
-
+    # battle_judgement メソッドを呼び出す
+    battle_judgement
   end
-
+  
   private
 
     def build_characters(**params)
-      # 勇者クラス、モンスタークラスそれぞれのインスタンスをインスタンス変数に格納
       @brave = params[:brave]
       @monster = params[:monster]
     end
 
     def battle_end?
-    # 勇者かモンスター、どちらかの HP が 0 になったらバトルが終了する
       @brave.hp <= 0 || @monster.hp <=0
     end
 
-    # 引数が不要になる
     def battle_result(brave)
-      # インスタンス変数に変更
       @brave.hp > 0
     end
 
-    # 引数が不要になる
+    # 勇者の勝敗によりメッセージを変更するメソッド
+    def battle_judgement
+      if battle_result 
+        result = calculate_of_exp_and_gold 
+        # インスタンス変数に変更
+        puts "#{@brave.name}はたたかいに勝った"
+        puts "#{result[:exp]}の経験値と#{result[:gold]}ゴールを獲得した"
+      else
+        # インスタンス変数に変更
+        puts "#{@brave.name}はたたかいに負けた"
+        puts "目の前が真っ暗になった"
+      end
+    end
+
     def calculate_of_exp_and_gold
       exp = (@monster.offense + @monster.defense) * EXP_CONSTANT
       gold = (@monster.offense + @monster.defense) * GOLD_CONSTANT
