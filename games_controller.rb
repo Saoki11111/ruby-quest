@@ -34,7 +34,7 @@ class GamesController
 
 
     # brave_win? にメソッド名を変更
-    def battle_win?
+    def brave_win?
       @brave.hp > 0
     end
 
@@ -43,13 +43,13 @@ class GamesController
       # brave_win? を呼び出す
       if brave_win?
         result = calculate_of_exp_and_gold 
-        # インスタンス変数に変更
-        puts "#{@brave.name}はたたかいに勝った"
-        puts "#{result[:exp]}の経験値と#{result[:gold]}ゴールを獲得した"
+
+
+        # puts "#{@brave.name}はたたかいに勝った"
+        # puts "#{result[:exp]}の経験値と#{result[:gold]}ゴールを獲得した"
       else
-        # インスタンス変数に変更
-        puts "#{@brave.name}はたたかいに負けた"
-        puts "目の前が真っ暗になった"
+        # puts "#{@brave.name}はたたかいに負けた"
+        # puts "目の前が真っ暗になった"
       end
     end
 
